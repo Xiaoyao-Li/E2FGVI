@@ -203,7 +203,7 @@ class InpaintGenerator(BaseNetwork):
                 if isinstance(m, SecondOrderDeformableAlignment):
                     m.init_offset()
 
-        # flow completion network
+        # flow completion networkl
         self.update_spynet = SPyNet()
 
     def forward_bidirect_flow(self, masked_local_frames):

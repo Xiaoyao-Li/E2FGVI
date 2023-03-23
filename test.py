@@ -116,9 +116,9 @@ def main_worker():
 
     net = importlib.import_module('model.' + args.model)
     model = net.InpaintGenerator().to(device)
+    print(f'Loading model from: {args.ckpt}')
     data = torch.load(args.ckpt, map_location=device)
     model.load_state_dict(data)
-    print(f'Loading model from: {args.ckpt}')
     model.eval()
 
     # prepare datset
@@ -197,27 +197,28 @@ def main_worker():
     print(f'Finish test! The result video is saved in: {save_path}.')
 
     # show results
-    print('Let us enjoy the result!')
-    fig = plt.figure('Let us enjoy the result')
-    ax1 = fig.add_subplot(1, 2, 1)
-    ax1.axis('off')
-    ax1.set_title('Original Video')
-    ax2 = fig.add_subplot(1, 2, 2)
-    ax2.axis('off')
-    ax2.set_title('Our Result')
-    imdata1 = ax1.imshow(frames[0])
-    imdata2 = ax2.imshow(comp_frames[0].astype(np.uint8))
+    
+    # print('Let us enjoy the result!')
+    # fig = plt.figure('Let us enjoy the result')
+    # ax1 = fig.add_subplot(1, 2, 1)
+    # ax1.axis('off')
+    # ax1.set_title('Original Video')
+    # ax2 = fig.add_subplot(1, 2, 2)
+    # ax2.axis('off')
+    # ax2.set_title('Our Result')
+    # imdata1 = ax1.imshow(frames[0])
+    # imdata2 = ax2.imshow(comp_frames[0].astype(np.uint8))
 
-    def update(idx):
-        imdata1.set_data(frames[idx])
-        imdata2.set_data(comp_frames[idx].astype(np.uint8))
+    # def update(idx):
+    #     imdata1.set_data(frames[idx])
+    #     imdata2.set_data(comp_frames[idx].astype(np.uint8))
 
-    fig.tight_layout()
-    anim = animation.FuncAnimation(fig,
-                                   update,
-                                   frames=len(frames),
-                                   interval=50)
-    plt.show()
+    # fig.tight_layout()
+    # anim = animation.FuncAnimation(fig,
+    #                                update,
+    #                                frames=len(frames),
+    #                                interval=50)
+    # # plt.show()
 
 
 if __name__ == '__main__':
