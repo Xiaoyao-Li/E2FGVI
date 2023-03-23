@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -J e2fgvi_test
-#SBATCH --comment "e2fgvi demo test
+#SBATCH --comment "e2fgvi demo test"
 #SBATCH -p gpu
 #SBATCH --qos level0
 #SBATCH -N 1
