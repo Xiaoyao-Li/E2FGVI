@@ -9,8 +9,8 @@
 #SBATCH -t 00-01:00:00
 #SBATCH --account research
 
-#SBATCH -o "/scratch/lipuhao/dev/MAH/DataPreprocess/e2fgvi/outputs/slurm/%x.%j.out"
-#SBATCH -e "/scratch/lipuhao/dev/MAH/DataPreprocess/e2fgvi/outputs/slurm/%x.%j.err"
+#SBATCH -o "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.out"
+#SBATCH -e "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.err"
 
-python test.py --model e2fgvi --video examples/tennis --mask examples/tennis_mask --ckpt release_model/E2FGVI-CVPR22.pth
+python test.py --model e2fgvi_hq --video examples/tennis --mask examples/tennis_mask --ckpt release_model/E2FGVI-HQ-CVPR22.pth
 
