@@ -12,5 +12,6 @@
 #SBATCH -o "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.out"
 #SBATCH -e "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.err"
 
-python test.py --model e2fgvi_hq --video examples/tennis --mask examples/tennis_mask --ckpt release_model/E2FGVI-HQ-CVPR22.pth
 
+echo "run the test slurm"
+python test.py --model e2fgvi --video examples/tennis --mask examples/tennis_mask --ckpt release_model/E2FGVI-CVPR22.pth

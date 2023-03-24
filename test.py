@@ -115,6 +115,7 @@ def main_worker():
         size = None
 
     net = importlib.import_module('model.' + args.model)
+    print(f'init InpaintGenerator model')
     model = net.InpaintGenerator().to(device)
     print(f'Loading model from: {args.ckpt}')
     data = torch.load(args.ckpt, map_location=device)
@@ -197,7 +198,7 @@ def main_worker():
     print(f'Finish test! The result video is saved in: {save_path}.')
 
     # show results
-    
+
     # print('Let us enjoy the result!')
     # fig = plt.figure('Let us enjoy the result')
     # ax1 = fig.add_subplot(1, 2, 1)
