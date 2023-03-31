@@ -9,8 +9,9 @@
 #SBATCH -t 00-01:00:00
 #SBATCH --account research
 
-#SBATCH -o "/scratch/lipuhao/dev/MAH/DataPreprocess/e2fgvi/outputs/slurm/%x.%j.out"
-#SBATCH -e "/scratch/lipuhao/dev/MAH/DataPreprocess/e2fgvi/outputs/slurm/%x.%j.err"
+#SBATCH -o "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.out"
+#SBATCH -e "/scratch/lipuhao/dev/MAH/DataPreprocess/E2FGVI/outputs/slurm/%x.%j.err"
+
 
 echo "run the test slurm"
 python test_slurm.py
