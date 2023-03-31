@@ -24,7 +24,7 @@ dependencies:
   - click=8.0.4=py37h06a4308_0
   - cloudpickle=2.0.0=pyhd3eb1b0_0
   - cryptography=3.4.8=py37hd23ed53_0
-  - cudatoolkit=10.1.243=h6bb024c_0
+  - cudatoolkit
   - cycler=0.11.0=pyhd3eb1b0_0
   - cytoolz=0.11.0=py37h7b6447c_0
   - dask-core=2021.10.0=pyhd3eb1b0_0
@@ -99,7 +99,7 @@ dependencies:
   - pysocks=1.7.1=py37_1
   - python=3.7.13=h12debd9_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
-  - pytorch=1.5.1=py3.7_cuda10.1.243_cudnn7.6.3_0
+  - pytorch
   - pywavelets=1.3.0=py37h7f8727e_0
   - qt=5.9.7=h5867ecd_1
   - readline=8.1.2=h7f8727e_1
@@ -117,7 +117,7 @@ dependencies:
   - tensorboard-plugin-wit=1.6.0=py_0
   - tk=8.6.11=h1ccaba5_0
   - toolz=0.11.2=pyhd3eb1b0_0
-  - torchvision=0.6.1=py37_cu101
+  - torchvision
   - tornado=6.1=py37h27cfd23_0
   - typing-extensions=4.1.1=hd3eb1b0_0
   - typing_extensions=4.1.1=pyh06a4308_0

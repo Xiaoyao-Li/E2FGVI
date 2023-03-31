@@ -11,6 +11,8 @@ from matplotlib import animation
 import torch
 
 from core.utils import to_tensors
+from icecream import install
+install()
 
 parser = argparse.ArgumentParser(description="E2FGVI")
 parser.add_argument("-v", "--video", type=str, required=True)
@@ -106,6 +108,7 @@ def resize_frames(frames, size=None):
 def main_worker():
     # set up models
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cpu")
 
     if args.model == "e2fgvi":
         size = (432, 240)
@@ -158,13 +161,20 @@ def main_worker():
             mod_size_w = 108
             h_pad = (mod_size_h - h % mod_size_h) % mod_size_h
             w_pad = (mod_size_w - w % mod_size_w) % mod_size_w
+
+            before_image = masked_imgs.clone()
+
             masked_imgs = torch.cat(
                 [masked_imgs, torch.flip(masked_imgs, [3])],
                 3)[:, :, :, :h + h_pad, :]
             masked_imgs = torch.cat(
                 [masked_imgs, torch.flip(masked_imgs, [4])],
                 4)[:, :, :, :, :w + w_pad]
-            pred_imgs, _ = model(masked_imgs, len(neighbor_ids))
+            
+            ic((masked_imgs - before_image).sum())
+
+            pred_imgs, _ = model(masked_imgs, len(neighbor_ids)) 
+            # pred_imgs, _ = model(masked_imgs.repeat(8, 1, 1, 1, 1), len(neighbor_ids))
             pred_imgs = pred_imgs[:, :, :h, :w]
             pred_imgs = (pred_imgs + 1) / 2
             pred_imgs = pred_imgs.cpu().permute(0, 2, 3, 1).numpy() * 255
