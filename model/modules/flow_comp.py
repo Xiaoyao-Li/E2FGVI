@@ -59,7 +59,8 @@ class SPyNet(nn.Module):
     def __init__(
         self,
         use_pretrain=True,
-        pretrained='https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth'
+        # pretrained='https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth'
+        pretrained='./release_model/spynet_20210409-c6c1bd09.pth'
     ):
         super().__init__()
 

@@ -63,7 +63,7 @@ def main() -> None:
                                                      )
         length_frames_per_ins = dataloader.dataset._LENGTH_FRAMES_PER_INS
         with torch.no_grad():
-            for i_b, batch in enumerate(tqdm(dataloader)):
+            for i_b, batch in enumerate(dataloader):
                 logger.info(f"Processing batch [{i_b}] of {len(dataloader)}")
                 masked_frames = batch["masked_imgs"].to(_DEVICE) # (B, T, C, H, W)
                 outpaths = batch["outpaths"]
