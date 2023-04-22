@@ -138,3 +138,4 @@ dependencies:
     - pyyaml==6.0
     - tqdm==4.64.0
     - yapf==0.32.0
+    - loguru

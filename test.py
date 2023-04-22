@@ -133,6 +133,7 @@ def main_worker():
     frames = read_frame_from_videos(args)
     frames, size = resize_frames(frames, size)
     h, w = size[1], size[0]
+    print(size) 
     video_length = len(frames)
     imgs = to_tensors()(frames).unsqueeze(0) * 2 - 1
     frames = [np.array(f).astype(np.uint8) for f in frames]
@@ -152,7 +153,9 @@ def main_worker():
             i for i in range(max(0, f - neighbor_stride),
                              min(video_length, f + neighbor_stride + 1))
         ]
-        ref_ids = get_ref_index(f, neighbor_ids, video_length)
+        # ref_ids = get_ref_index(f, neighbor_ids, video_length)
+        ref_ids = []
+
         selected_imgs = imgs[:1, neighbor_ids + ref_ids, :, :, :]
         selected_masks = masks[:1, neighbor_ids + ref_ids, :, :, :]
         with torch.no_grad():
@@ -161,7 +164,7 @@ def main_worker():
             mod_size_w = 108
             h_pad = (mod_size_h - h % mod_size_h) % mod_size_h
             w_pad = (mod_size_w - w % mod_size_w) % mod_size_w
-
+            print(f'h_pad: {h_pad}, w_pad: {w_pad}')
             before_image = masked_imgs.clone()
 
             masked_imgs = torch.cat(
@@ -171,7 +174,7 @@ def main_worker():
                 [masked_imgs, torch.flip(masked_imgs, [4])],
                 4)[:, :, :, :, :w + w_pad]
             
-            ic((masked_imgs - before_image).sum())
+            # ic((masked_imgs - before_image).sum())
 
             pred_imgs, _ = model(masked_imgs, len(neighbor_ids)) 
             # pred_imgs, _ = model(masked_imgs.repeat(8, 1, 1, 1, 1), len(neighbor_ids))
@@ -180,14 +183,16 @@ def main_worker():
             pred_imgs = pred_imgs.cpu().permute(0, 2, 3, 1).numpy() * 255
             for i in range(len(neighbor_ids)):
                 idx = neighbor_ids[i]
-                img = np.array(pred_imgs[i]).astype(
-                    np.uint8) * binary_masks[idx] + frames[idx] * (
-                        1 - binary_masks[idx])
+                # img = np.array(pred_imgs[i]).astype(
+                #     np.uint8) * binary_masks[idx] + frames[idx] * (
+                #         1 - binary_masks[idx])
+                img = np.array(pred_imgs[i]).astype(np.uint8)
                 if comp_frames[idx] is None:
                     comp_frames[idx] = img
                 else:
-                    comp_frames[idx] = comp_frames[idx].astype(
-                        np.float32) * 0.5 + img.astype(np.float32) * 0.5
+                    pass
+                    # comp_frames[idx] = comp_frames[idx].astype(
+                    #     np.float32) * 0.5 + img.astype(np.float32) * 0.5
 
     # saving videos
     print('Saving videos...')
