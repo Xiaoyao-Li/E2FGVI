@@ -1,3 +1,4 @@
+import torch
 import json
 import cv2
 import yaml
@@ -8,7 +9,7 @@ import os
 import argparse
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-import torch
+
 from loguru import logger
 
 from core.utils import to_tensors

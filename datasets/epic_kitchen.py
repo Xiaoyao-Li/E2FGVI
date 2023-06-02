@@ -88,17 +88,9 @@ class EpicKitchenSub(Dataset):
             end_frame = row['stop_frame']
             
             # insert start frames into index_mapping_list
-            frames_list = [i for i in range(start_frame - self._LENGTH_NEIGHBOR, start_frame + self._LENGTH_NEIGHBOR + 1)]
-            frames_list = [i if i >= 1 else 1 for i in frames_list]
-            frames_list = [i if i <= self.clip_length else self.clip_length for i in frames_list]
-            self.index_mapping_list.append(frames_list)
-
-            # insert end frames into index_mapping_list
-            frames_list = [i for i in range(end_frame - self._LENGTH_NEIGHBOR, end_frame + self._LENGTH_NEIGHBOR + 1)]
-            frames_list = [i if i >= 1 else 1 for i in frames_list]
-            frames_list = [i if i <= self.clip_length else self.clip_length for i in frames_list]
+            frames_list = [[i] for i in range(start_frame, end_frame + 1) if not os.path.exists(os.path.join(self.out_basedir, self._index_to_img_fn(i)))]
             self._init_padding_params()
-            self.index_mapping_list.append(frames_list)
+            self.index_mapping_list += frames_list
 
 
     def _index_to_img_fn(self, index) -> str:
